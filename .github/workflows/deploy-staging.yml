@@ -16,7 +16,6 @@ env:
 jobs:
   build:
     if: contains(github.event.pull_request.labels.*.name, 'stage')
-    permissions: write-all
     runs-on: ubuntu-latest
 
     steps:
@@ -35,6 +34,9 @@ jobs:
 
   Build-Docker-Image:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     needs: build
     name: Build image and store in GitHub Container Registry
     steps:
